@@ -18,4 +18,16 @@ $> ng new NeostoreAdmin
 * To install dependencies[in NeostoreBackend]
 ````
 $> npm install  
-```
+````
+* To Open my bash profile
+````
+$> source ~/.bash_deo
+````
+* Start Mongo at your specified path
+````
+mongod --dbpath /Users/webwerks/Documents/NeostoreDB/v1/db
+````
+* MongoDB Url
+````
+mongodb://127.0.0.1:27017/NeostoreDB
+````
