@@ -5,8 +5,23 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+/*########## Added package for Authentication JWT  #############*/
+
+var jwt=require('jsonwebtoken');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
+
+/* This will add for login api for version 1 */
+var register = require('./routes/api/v1/register');
+var login = require('./routes/api/v1/login');
+
+
+/*########## This will use for Authentication JWT  #############*/
+var authController = require('./routes/api/v1/authController');
+
+/*########## This will SECRET_KEY for Authentication JWT  #############*/
+process.env.SECRET_KEY="somu";
 
 var app = express();
 
@@ -21,6 +36,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.get('/api/v1/authenticate',authController.auth);
+app.use('/api/v1/register', register);
+app.use('/api/v1/login', login);
 
 app.use('/', index);
 app.use('/users', users);
