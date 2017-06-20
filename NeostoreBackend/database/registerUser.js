@@ -9,14 +9,15 @@ var registerUser = function (login_details, callback) {
     var db = database.getDatabase();
     console.log("inside register user");
     var collection = db.collection('Users');
+
     // Find some documents
-    collection.find().toArray(function(err, data) {
+    collection.find({"email" : login_details.email}).toArray(function(err, data) {
         assert.equal(err, null);
         console.log("data"+JSON.stringify(data));
         if (data.length > 0) {
             callback({
                 status:"0005",
-                statusMessage : 'Failed'
+                statusMessage : 'email already exist'
             });
         } else {
             //callback(err);
@@ -28,7 +29,13 @@ var registerUser = function (login_details, callback) {
                 password    : login_details.password,
                 birth_date  : login_details.birth_date,
                 phone       : login_details.phone,
-                image       : login_details.image
+                user_role   : login_details.user_role,
+                facebook_id : "",
+                gmail_id    : "",
+                created_date : new Date(),
+                modified_date : ""
+
+
 
             }, function(error, datain) {
                 if(error==null){
