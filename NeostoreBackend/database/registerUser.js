@@ -30,32 +30,57 @@ var registerUser = function (login_details, callback) {
             var salt = bcrypt.genSaltSync(10);
             var hash = bcrypt.hashSync(login_details.password, salt);
             console.log('hash-->'+hash);
-            collection.insertOne({
-                first_name  : login_details.first_name,
-                last_name   : login_details.last_name,
-                gender      : login_details.gender,
-                email       : login_details.email,
-                password    : hash,    //login_details.password
-                birth_date  : login_details.birth_date,
-                phone       : login_details.phone,
-
-                user_role   : login_details.user_role,
-                facebook_id : "",
-                gmail_id    : "",
-                created_date : new Date(),
-                modified_date : ""
-
-
+            if (login_details.facebook_id == "" && login_details.gmail_id == "") {
+                collection.insertOne({
+                    first_name  : login_details.first_name,
+                    last_name   : login_details.last_name,
+                    gender      : login_details.gender,
+                    email       : login_details.email,
+                    password    : hash,    //login_details.password
+                    birth_date  : login_details.birth_date,
+                    phone       : login_details.phone,
+                    user_role   : login_details.user_role,
+                    facebook_id : login_details.facebook_id,
+                    gmail_id    : login_details.gmail_id,
+                    created_date : new Date(),
+                    modified_date : ""
 
 
-            }, function(error, datain) {
-                if(error==null){
-                    callback({
-                        status:"0001",
-                        statusMessage : 'Inserted Successfully'
-                    });
-                }
-            });
+                }, function(error, datain) {
+                    if(error==null){
+                        callback({
+                            status:"0001",
+                            statusMessage : 'Inserted Successfully'
+                        });
+                    }
+                });
+            }
+            else {
+                collection.insertOne({
+                    first_name  : login_details.first_name,
+                    last_name   : login_details.last_name,
+                    gender      : login_details.gender,
+                    email       : login_details.email,
+                    password    : "",    //must be empty
+                    birth_date  : login_details.birth_date,
+                    phone       : login_details.phone,
+                    user_role   : login_details.user_role,
+                    facebook_id : login_details.facebook_id,
+                    gmail_id    : login_details.gmail_id,
+                    created_date : new Date(),
+                    modified_date : ""
+
+
+                }, function(error, datain) {
+                    if(error==null){
+                        callback({
+                            status:"0001",
+                            statusMessage : 'Inserted Successfully'
+                        });
+                    }
+                });
+            }
+
         }
     });
 };

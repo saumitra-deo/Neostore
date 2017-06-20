@@ -89,24 +89,18 @@ router.post('/', function (req, res, next) {
         dataSet = {};
         invalidBody = true;
     }
-    // else if (!validator.isMobilePhone(req.body.phone)) {
-    //     status = '013';
-    //     statusMessage = 'Phone Number must be number only ';
-    //     dataSet = {};
-    //     invalidBody = true;
-    // }
     else if (!validator.matches(req.body.phone,/^\d{10}$/)) {
-        status = '014';
+        status = '013';
         statusMessage = 'Phone Number must be 10 digit only ';
         dataSet = {};
         invalidBody = true;
     }else if (!req.body.user_role) {
-        status = '015';
+        status = '014';
         statusMessage = 'User Role is required';
         dataSet = {};
         invalidBody = true;
     }else if (!validator.isIn(req.body.user_role,["user","admin"])) {
-        status = '016';
+        status = '015';
         statusMessage = 'User Role must be user or admin';
         dataSet = {};
         invalidBody = true;
@@ -133,11 +127,9 @@ router.post('/', function (req, res, next) {
         email       : req.body.email,
         password    : req.body.password,
         birth_date  : req.body.birth_date,
-        phone       : req.body.phone
-
-
-
-
+        phone       : req.body.phone,
+        facebook_id : req.body.facebook_id,
+        gmail_id    : req.body.gmail_id
 
 
     };
