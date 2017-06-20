@@ -8,7 +8,7 @@ var validator = require('validator');
 
 /*########## Added package for Authentication JWT  #############*/
 
-var jwt=require('jsonwebtoken');
+//var jwt=require('jsonwebtoken');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
