@@ -31,3 +31,30 @@ mongod --dbpath /Users/webwerks/Documents/NeostoreDB/v1/db
 ````
 mongodb://127.0.0.1:27017/NeostoreDB
 ````
+
+
+
+
+
+
+
+
+
+
+
+
+* For JWT
+````
+npm install jsonwebtoken
+````
+* For MongoDB module
+````
+npm install mongodb --save
+````
+* Validation module 
+````
+npm install validator
+````
+* Encrypt
+````
+npm install bcryptjs

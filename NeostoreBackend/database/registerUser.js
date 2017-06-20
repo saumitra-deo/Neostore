@@ -3,6 +3,7 @@
  */
 var database = require('./db');
 var assert = require('assert');
+var bcrypt = require('bcryptjs');
 
 var registerUser = function (login_details, callback) {
     // Get the documents collection
@@ -10,7 +11,7 @@ var registerUser = function (login_details, callback) {
     console.log("inside register user");
     var collection = db.collection('Users');
     // Find some documents
-    collection.find().toArray(function(err, data) {
+    collection.find({email:login_details.email}).toArray(function(err, data) {
         assert.equal(err, null);
         console.log("data"+JSON.stringify(data));
         if (data.length > 0) {
@@ -20,15 +21,19 @@ var registerUser = function (login_details, callback) {
             });
         } else {
             //callback(err);
+            console.log(login_details.password);
+            var salt = bcrypt.genSaltSync(10);
+            var hash = bcrypt.hashSync(login_details.password, salt);
+            console.log('hash-->'+hash);
             collection.insertOne({
                 first_name  : login_details.first_name,
                 last_name   : login_details.last_name,
                 gender      : login_details.gender,
                 email       : login_details.email,
-                password    : login_details.password,
+                password    : hash,    //login_details.password
                 birth_date  : login_details.birth_date,
                 phone       : login_details.phone,
-                image       : login_details.image
+                image       : login_details.image //should be inserted after registartion
 
             }, function(error, datain) {
                 if(error==null){
