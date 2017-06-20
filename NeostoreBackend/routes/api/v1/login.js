@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var validator = require('validator');
 var getUser = require('../../../database/getUser');
-var authController=require('../v1/authController');
+var authController=require('jwtTokengenerator');
 
 router.put('/', function (req, res, next) {
     //res.send('respond with a resource');

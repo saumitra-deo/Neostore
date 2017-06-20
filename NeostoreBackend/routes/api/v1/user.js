@@ -15,12 +15,6 @@ router.post('/', function (req, res, next) {
     var invalidBody = false;
     console.log("body is"+JSON.stringify(req.body));
 
-
-
-
-
-
-
     if (!req.body.first_name) {
         status = '001';
         statusMessage = 'First name is required';
