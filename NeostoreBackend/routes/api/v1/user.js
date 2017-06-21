@@ -153,9 +153,18 @@ router.get('/:id', function (req, res, next) {
     var callback = function (data) {
         var status, statusMessage, dataSet;
         if (data.length > 0) {
+            var response = {
+                "user_id": data[0]._id,
+                "first_name": data[0].first_name,
+                "last_name": data[0].last_name,
+                "gender": data[0].gender,
+                "email": data[0].email,
+                "birth_date": data[0].birth_date,
+                "phone": data[0].phone,
+            };
             status = '200';
             statusMessage = 'Success';
-            dataSet = data;
+            dataSet = response;
         } else {
             status = '404';
             statusMessage = 'No Data Found';
