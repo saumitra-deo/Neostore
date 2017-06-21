@@ -40,8 +40,8 @@ var registerUser = function (login_details, callback) {
                     birth_date  : login_details.birth_date,
                     phone       : login_details.phone,
                     user_role   : login_details.user_role,
-                    facebook_id : login_details.facebook_id,
-                    gmail_id    : login_details.gmail_id,
+                    facebook_id : "",//login_details.facebook_id,
+                    gmail_id    : "",//login_details.gmail_id,
                     created_date : new Date(),
                     modified_date : ""
 

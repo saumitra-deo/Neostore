@@ -58,3 +58,9 @@ npm install validator
 * Encrypt
 ````
 npm install bcryptjs
+
+````
+* Cors Module
+````
+npm install cors
+````

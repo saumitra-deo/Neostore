@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var validator = require('validator');
-
+var cors =require('cors');
 /*########## Added package for Authentication JWT  #############*/
 
 //var jwt=require('jsonwebtoken');
@@ -19,7 +19,7 @@ var login = require('./routes/api/v1/login');
 
 
 /*########## This will use for Authentication JWT  #############*/
-var authController = require('./routes/api/v1/jwtTokengenerator');
+//var authController = require('./routes/api/v1/jwtTokengenerator');
 
 /*########## This will SECRET_KEY for Authentication JWT  #############*/
 process.env.SECRET_KEY="somu";
@@ -38,6 +38,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Maintaining Cross Domain Request...
+app.use(cors());
 
 //app.get('/api/v1/authenticate',authController.auth);
 app.use('/api/v1/user', user);
