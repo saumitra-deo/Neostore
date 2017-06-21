@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var validator = require('validator');
-var getUser = require('../../../database/getUser');
+var getUserFunctions = require('../../../database/getUser');
 var authController=require('../v1/jwtTokengenerator');
 
 router.put('/', function (req, res, next) {
@@ -99,7 +99,7 @@ router.post('/', function (req, res, next) {
         return;
     };
     console.log("login");
-    getUser(
+    getUserFunctions.getUser(
         login_details,
         callback
     );

@@ -3,7 +3,7 @@ var router = express.Router();
 var validator = require('validator');
 
 var registerUser = require('../../../database/registerUser');
-
+var getUserFunctions = require('../../../database/getUser');
 router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
@@ -140,6 +140,38 @@ router.post('/', function (req, res, next) {
 
     registerUser(
         login_details,
+        callback
+    );
+});
+
+// API to Get User Details
+router.get('/:id', function (req, res, next) {
+
+    console.log("id : "+req.params.id);
+    console.log("name : "+req.headers.name);
+    //This function is called once data is received from DB
+    var callback = function (data) {
+        var status, statusMessage, dataSet;
+        if (data.length > 0) {
+            status = '200';
+            statusMessage = 'Success';
+            dataSet = data;
+        } else {
+            status = '404';
+            statusMessage = 'No Data Found';
+        }
+
+        res.json({
+            status: status,
+            statusMessage: statusMessage,
+            dataSet: dataSet
+        });
+
+        return;
+    };
+
+    getUserFunctions.getUserDetails(
+        req.params.id,
         callback
     );
 });
